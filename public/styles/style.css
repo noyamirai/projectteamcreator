@@ -82,15 +82,15 @@ h1 {
 
 /* Heading 2 */
 h2 {
-  font-size: 22px; font-size: 2.2rem;
-  padding-bottom: 16px;
+  font-size: 20px; font-size: 2.0rem;
+  padding-bottom: 14px;
   margin-bottom: 20px;
   border-bottom: 3px solid var(--grey-color);
 }
 
 /* Heading 3 */
 h3 {
-  font-size: 18px; font-size: 1.8rem;
+  font-size: 16px; font-size: 1.6rem;
 }
 
 /* p + p {
@@ -123,6 +123,47 @@ ol {
 }
 
 /* =============================================================================
+  #UTILITIES
+============================================================================= */
+.box-shadow>* {
+  position: relative;
+  z-index: 10;
+}
+
+.box-shadow::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--white-color);
+  border: var(--border-settings);
+  border-radius: var(--border-radius);
+  z-index: 5;
+}
+
+.box-shadow::after {
+  content: "";
+
+  position: absolute;
+
+  top: 7px;
+  left: 7px;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--white-color);
+  border: var(--border-settings);
+  border-radius: var(--border-radius);
+  z-index: 0;
+}
+/* =============================================================================
   #BANNER
 ============================================================================= */
 header {
@@ -133,11 +174,13 @@ header {
   justify-content: center;
   flex-direction: column;
   
-  height: 222px;
+  height: 200px;
 
   text-align: center;
 
   background-color: var(--primary-color);
+
+  z-index: -5;
 }
 
 /* pencil illustrations */
@@ -174,7 +217,6 @@ header::after {
     display: flex;
     align-items: center;
     flex-direction: column;
-
   }
 
     /* profile picture */
@@ -189,34 +231,15 @@ header::after {
       margin-left: -7px;
     }
 
-      header > figure > picture::before {
-        content: "";
-
-        position: absolute;
-
-        top: 7px;
-        left: 7px;
-
-        width: 100%;
+      header > figure > picture img {
+        width: auto;
         height: 100%;
 
         background-color: var(--white-color);
-        border-radius: var(--border-radius);
+
         border: var(--border-settings);
-
+        border-radius: var(--border-radius);
       }
-
-        header > figure > picture img {
-          position: relative;
-
-          width: auto;
-          height: 100%;
-
-          object-fit: fill;
-
-          border: var(--border-settings);
-          border-radius: var(--border-radius);
-        }
 
     /* Name tag */
     header > figure > figcaption {
@@ -256,7 +279,7 @@ header::after {
 
     /* only add margin if there is a name tag */
     header > figure > picture + figcaption {
-      margin-top: 20px;
+      margin-top: 24px;
     }
 
 /* =============================================================================
@@ -266,6 +289,72 @@ main {
   padding: var(--default-padding);
 }
 
+main ul {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  list-style: none;
+  padding-left: 0;
+}
+
+  ul li {
+    position: relative;
+  
+    width: 100%;
+  }
+
+  ul li + li {
+    margin-top: 20px;
+  }
+
+  ul li a {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    padding: 14px; 
+    color: var(--secondary-color);
+
+    /* background-color: var(--white-color); */
+    background-color: blue;
+
+    /* border: var(--border-settings); */
+    border-radius: var(--border-radius);
+
+    transition: all .25s ease-in-out;
+  }
+
+  ul li a:hover {
+    transform: scale(1.02);
+  }
+
+    /* Course profile pic */
+    ul li a > p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin-right: 16px;
+
+      width: 45px;
+      height: 45px;
+
+      border-radius: 50%;
+
+      font-size: 18px; font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--white-color);
+
+      background-color: var(--secondary-color);
+    }
+
+    /* little description or info about item */
+    ul li a > div > p {
+      font-size: 14px; font-size: 1.4rem;
+      color: var(--grey-text-color);
+    }
 /* =============================================================================
   #BUTTON
 ============================================================================= */
