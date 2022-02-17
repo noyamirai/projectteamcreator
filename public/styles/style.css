@@ -24,8 +24,7 @@ html { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: 
   --border-radius: 6px;
   --border-settings: 3px solid #0A0A0A;
 
-  --side-padding: 24px;
-  --top-padding: 20px;
+  --default-padding: 24px;
 
   --image-opacity: 15%;
 }
@@ -62,33 +61,36 @@ body {
 
 
 img {
-    max-width: 100%;
-    font-style: italic;
-    vertical-align: middle;
+  max-width: 100%;
+  font-style: italic;
+  vertical-align: middle;
 }
 
 /* =============================================================================
   #TYPOGRAPHY
 ============================================================================= */
 h1, h2, h3, h4, h5, h6 {
-    margin-top: 0;
-    line-height: 1.1;
+  margin-top: 0;
+  line-height: 1.1;
 }
 
 
 /* Heading 1 */
 h1 {
-    font-size: 35px; font-size: 3.5rem;
+  font-size: 35px; font-size: 3.5rem;
 }
 
 /* Heading 2 */
 h2 {
-    font-size: 22px; font-size: 2.2rem;
+  font-size: 22px; font-size: 2.2rem;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 3px solid var(--grey-color);
 }
 
 /* Heading 3 */
 h3 {
-    font-size: 18px; font-size: 1.8rem;
+  font-size: 18px; font-size: 1.8rem;
 }
 
 /* p + p {
@@ -231,7 +233,27 @@ header::after {
 
       border-radius: var(--border-radius);
     }
-    
+
+    /* arrow icon */
+    header > figure > figcaption::before {
+      content: "";
+      position: absolute;
+
+      top: -7px;
+      left: 50%;
+
+      transform: translateX(-50%);
+      
+      width: 24px;
+      height: 12px;
+
+      background-color: transparent;
+      background-image: url("../images/icons/name_tag-triangle-big.svg");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
     /* only add margin if there is a name tag */
     header > figure > picture + figcaption {
       margin-top: 20px;
@@ -241,7 +263,7 @@ header::after {
   #MAIN
 ============================================================================= */
 main {
-  padding: var(--top-padding) var(--side-padding);
+  padding: var(--default-padding);
 }
 
 /* =============================================================================
@@ -253,5 +275,5 @@ main {
   #FOOTER
 ============================================================================= */
 footer {
-  padding: 12px var(--side-padding);
+  padding: 12px var(--default-padding);
 }
