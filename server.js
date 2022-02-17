@@ -16,7 +16,7 @@ app.engine('hbs', handlebars.engine({
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.render('main', {layout : "default", post: { author: "Maijla"} });
+  res.render('home', {layout : "default", post: { author: "Maijla"} });
 });
 
 app.get('*', function(req, res){
