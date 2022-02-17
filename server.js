@@ -13,10 +13,10 @@ app.engine('hbs', handlebars.engine({
   extname: 'hbs'
 }));
 
-app.use(express.static('public'));
+app.use('/public', express.static('public'));
 
 app.get('/', (req, res) => {
-  res.render('home', {layout : "default", post: { author: "Maijla"} });
+  res.render('course-overview', {layout : "default"});
 });
 
 app.get('*', function(req, res){
