@@ -299,6 +299,29 @@ header::after {
       border-radius: var(--border-radius);
     }
 
+      header > figure > figcaption > span {
+        position: absolute;
+
+        top: -12px;
+        right: -12px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 24px;
+        height: 24px;
+        
+        border-radius: 50%;
+        border: var(--border-settings);
+
+        background-color: var(--white-color);
+      }
+        header > figure > figcaption > span img{
+          width: 12px;
+          height: auto;
+        }
+
     /* arrow icon */
     header > figure > figcaption::before {
       content: "";
@@ -348,6 +371,32 @@ header::after {
     background-color: var(--white-color);
   }
 
+  /* Back button */
+  header > a {
+    position: absolute;
+
+    top: 24px;
+    left: 24px;
+
+    display: flex;
+    width: 40px;
+    height: 40px;
+
+    border: var(--border-settings);
+    border-radius: var(--border-radius);
+
+    background-color: var(--white-color);
+  }
+
+    header > a img {
+      height: 16px;
+      width: auto;
+
+      margin: auto;
+
+      /* flip it */
+      transform: scaleX(-1);
+    }
 /* =============================================================================
   #MAIN
 ============================================================================= */
