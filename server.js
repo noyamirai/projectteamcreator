@@ -16,7 +16,11 @@ app.engine('hbs', handlebars.engine({
 app.use('/public', express.static('public'));
 
 app.get('/', (req, res) => {
-  res.render('course-overview', {layout : "default"});
+  res.render('courses-overview', {layout : "default"});
+});
+
+app.get('/classes', (req, res) => {
+  res.render('classes-overview', {layout : "default"});
 });
 
 app.get('*', function(req, res){
