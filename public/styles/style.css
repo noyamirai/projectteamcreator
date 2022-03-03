@@ -489,6 +489,11 @@ main {
   .grid--img li a {
     position: relative;
     padding: 0;
+    cursor: default;
+  }
+
+  .grid--img li a:hover {
+    transform: none;
   }
 
     .grid--img li a > img {
@@ -501,7 +506,39 @@ main {
 /* =============================================================================
   #BUTTON
 ============================================================================= */
+button, .btn {
+  /* position: relative; */
+  position: fixed;
 
+  bottom: var(--default-padding);
+  left: var(--default-padding);
+  right: var(--default-padding);
+
+  display: inline-block;
+  padding: 14px;
+
+  /* width: 100%; */
+  min-height: 50px;
+
+  color: var(--white-color);
+  font-size: 16px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+
+  cursor: pointer;
+
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  border: none;
+
+  transition: all 150ms ease-in-out;
+}
+
+button:hover, .btn:hover {
+  transform: scale(1.02);
+}
 
 /* =============================================================================
   #FOOTER
