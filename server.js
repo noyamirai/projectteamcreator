@@ -26,6 +26,10 @@ app.get('/classes', (req, res) => {
   res.render('classes-overview', {layout : "default"});
 });
 
+app.get('/class-details', (req, res) => {
+  res.render('class-details', {layout : "default-yellow"});
+});
+
 app.get('*', function(req, res){
   res.status(404).send('Page not found!');
 });
