@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 
 const handlebars = require('express-handlebars');
+const connectDb = require('./config/db');
 
 app.set('view engine', 'hbs');
 
@@ -14,6 +15,8 @@ app.engine('hbs', handlebars.engine({
 }));
 
 app.use('/public', express.static('public'));
+
+connectDb();
 
 app.get('/', (req, res) => {
   res.render('courses-overview', {layout : "default"});
