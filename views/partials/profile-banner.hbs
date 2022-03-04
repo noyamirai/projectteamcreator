@@ -5,7 +5,11 @@
         </picture>
 
         <figcaption>
-            <p>Robert Spier</p>
+            {{#each userData}} 
+                {{#with name}}
+                    <p>{{firstName}} {{lastName}}</p>
+                {{/with}}
+            {{/each}}
             <span><img src="../../public/images/icons/check-icon.svg" alt="Checkmark icon"></span>
         </figcaption>
     </figure>

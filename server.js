@@ -4,7 +4,11 @@ const app = express();
 const port = 3000;
 
 const handlebars = require('express-handlebars');
+
 const db = require('./config/db');
+
+const courseCRUD = require('./controller/course-crud');
+const userCRUD = require('./controller/user-crud');
 
 app.set('view engine', 'hbs');
 
@@ -19,25 +23,27 @@ app.use('/public', express.static('public'));
 
 db.connectDb();
 
-app.get('/', async (req, res, next) => {
-  // const user = db.getUserByLastName("Spier").then((user) => { user });
-  res.render('courses-overview', {layout : "default"});
+app.get('/', (req, res) => {
+  // to-do: error handling here
+  userCRUD.findUserByQuery("name.lastName", "Spier").then((user) => {
+    userCRUD.getUserCourses(user.id).then((courses) => {
+      res.render('courses-overview', { layout: "default", userData: user, courseData: courses });
+    });
+  });
 
-  // let func = await db.getCourseIdByTitle(["Front-end Development", "Project Tech"]);
-  // console.log(func);
+  // userCRUD.getUserCourses("Spier");
 
-  // db.getCourseIdByTitle('Project Tech').then((id) => { 
-  //   console.log(id); 
-  // });
-
-  // db.getCourseIdByTitle("Project Tech").then((id) => {
-  //   db.createUser({
-  //     firstname: "Ivo", 
-  //     lastname: "Nijhuis", 
+  // courseCRUD.getCourseIdByTitle(["Project Tech", "Front-end Development"]).then((id) => {
+  //   userCRUD.createUser({
+  //     name: {
+  //       firstName: "Robert",
+  //       lastName: "Spier",
+  //     },
   //     type: "teacher", 
-  //     given_courses: id
+  //     courses: id
   //   });
   // });
+
 });
 
 app.get('/classes', (req, res) => {
