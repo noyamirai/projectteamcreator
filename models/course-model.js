@@ -8,9 +8,6 @@ var courseSchema = new Schema({
   title: {
     type: String,
     required: [true, 'Why no Title?']
-  },
-  teachers: {
-    type: []
   }},
   { collection: 'courses'});
 

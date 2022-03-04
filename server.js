@@ -1,3 +1,4 @@
+const { log } = require('async');
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -18,13 +19,25 @@ app.use('/public', express.static('public'));
 
 db.connectDb();
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res, next) => {
+  // const user = db.getUserByLastName("Spier").then((user) => { user });
   res.render('courses-overview', {layout : "default"});
-  // db.createCourse("Stinky course");
-  // YASSSSS
 
-  // db.createManyCourses(["stinky 1", "stinky 2", "stinky 3"]);
-  // db.createUser({firstname: "Robert", lastname: "Spier", type: "teacher"});
+  // let func = await db.getCourseIdByTitle(["Front-end Development", "Project Tech"]);
+  // console.log(func);
+
+  // db.getCourseIdByTitle('Project Tech').then((id) => { 
+  //   console.log(id); 
+  // });
+
+  // db.getCourseIdByTitle("Project Tech").then((id) => {
+  //   db.createUser({
+  //     firstname: "Ivo", 
+  //     lastname: "Nijhuis", 
+  //     type: "teacher", 
+  //     given_courses: id
+  //   });
+  // });
 });
 
 app.get('/classes', (req, res) => {
