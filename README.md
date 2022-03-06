@@ -133,5 +133,5 @@ Learn more about PTC and dive deeper into this project by reading the process do
 
 This project is licensed under the terms of the MIT license.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/noyamirai/projectteamcreator/blob/main/LICENSE)
 
