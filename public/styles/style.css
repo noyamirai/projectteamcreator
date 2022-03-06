@@ -330,6 +330,7 @@ header::after {
     border-radius: var(--border-radius);
 
     line-height: normal;
+    z-index: 10;
   }
 
   header h1, header h3 {

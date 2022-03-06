@@ -1,44 +1,5 @@
 // Model
-const { log } = require('async');
 const schemas = require('../models/schemas');
-
-// courseCRUD.createMultipleCourses({ title: "Project Tech" });
-const createCourse = async (docObject) => {
-    const course = new schemas.Course(docObject);
-
-    course.save((err) => {
-        if (err) Promise.reject(err);
-    }); 
-}
-
-// courseCRUD.createMultipleCourses([{ title: "Project Tech" }, { title: "Front-end Development" }]);
-const createMultipleCourses = async (docObjects) => {
-    docObjects.forEach(doc => {
-        schemas.Course.insertMany(doc, (err) => {
-            if (err) Promise.reject(err);
-        });
-    });
-}
-
-// Return full course object
-const findCourseByQuery = async (key, equalTo) => {
-    return new Promise((resolve, reject) => {
-        console.log("QUERY FUNCTION RECEIVED: " + equalTo);
-        schemas.Course.find({ [`${key}`]: equalTo }, (err, result) => {
-            if (err) reject(err);
-
-            if (!result.length) {
-                console.log('user not found');
-            } else {
-                result.forEach((course) => {
-                    console.log('course found: ');
-                    console.log(course);
-                    resolve(course);
-                })
-            }
-        });
-    })
-}
 
 // Returns one or more course ids
 // courseCRUD.getCourseIdByTitle(['Project Tech', 'Front-end Development'])
@@ -86,8 +47,5 @@ const getCourseIdByTitle = (courseTitles) => {
 }
 
 module.exports = {
-    createCourse,
-    createMultipleCourses,
-    findCourseByQuery,
     getCourseIdByTitle
 };

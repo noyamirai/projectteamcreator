@@ -1,35 +1,20 @@
 {{> title-banner}}
 
 <main>
-    <h2>Jouw Project Tech klassen</h2>
+    <h2>Jouw {{courseAcr}} klassen</h2>
 
     <ol class="grid grid--overview">
-        <li>
-            <a class="box-shadow" href="#">
-                <div>
-                    <h3>Tech-1</h3>
-                    <p>18 studenten</p>
-                </div>
-                <p>Bekijk klas</p>
-            </a>
-        </li>
-        <li>
-            <a class="box-shadow" href="#">
-                <div>
-                    <h3>Tech-2</h3>
-                    <p>18 studenten</p>
-                </div>
-                <p>Bekijk klas</p>
-            </a>
-        </li>
-        <li>
-            <a class="box-shadow" href="#">
-                <div>
-                    <h3>Tech-3</h3>
-                    <p>18 studenten</p>
-                </div>
-                <p>Bekijk klas</p>
-            </a>
-        </li>
+        {{#each classData}}
+            <li>
+                <a class="box-shadow" href="#">
+                    <div>
+                        <h3>{{name}}</h3>
+                        <p>TODO: only student users</p>
+                        {{!-- <p>{{users.length}} studenten</p> --}}
+                    </div>
+                    <p>Bekijk klas</p>
+                </a>
+            </li>
+        {{/each}}
     </ol>
 </main>
