@@ -31,19 +31,45 @@ app.get('/', (req, res) => {
     });
   });
 
-  // userCRUD.getUserCourses("Spier");
-
+  // courseCRUD.createCourse({ title: "Front-end Development" })
+  
   // courseCRUD.getCourseIdByTitle(["Project Tech", "Front-end Development"]).then((id) => {
   //   userCRUD.createUser({
   //     name: {
-  //       firstName: "Robert",
-  //       lastName: "Spier",
+  //       firstName: "Maijla",
+  //       lastName: "Ikiz",
   //     },
-  //     type: "teacher", 
+  //     type: "student", 
   //     courses: id
-  //   });
+  //   }).then((userDoc) => {
+  //     const userCourses = userDoc.courses;
+  //     userCourses.forEach(course => {
+  //       console.log('updating course with id: ' + course);
+  //       courseCRUD.findCourseByQuery("id", course).then((courseDoc) => {
+  //         console.log('course found. adding user: ' + userDoc.id);
+  //         // courseDoc.users.push(userDoc.id);
+  //         // courseDoc.save();
+  //       })
+  //     });
+  //   })
   // });
+  // courseCRUD.getCourseIdByTitle(["Project Tech", "Front-end Development"]).then((id) => {
+  //   userCRUD.createUser({
+  //     name: {
+  //       firstName: "Maijla",
+  //       lastName: "Ikiz",
+  //     },
+  //     type: "student", 
+  //     courses: id
+  //   })
+  // });
+    userCRUD.findUserByQuery("name.lastName", "Ikiz").then((user) => {
+      const courseIds = user.courses;
+      const userId = user.id;
+      userCRUD.updateUserCourse(courseIds, userId);
+    })
 
+  // courseCRUD.findCourseByQuery("_id", "62226c58315e5ab16891293e")
 });
 
 app.get('/classes', (req, res) => {

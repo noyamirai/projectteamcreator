@@ -1,9 +1,10 @@
 // Model
+const { log } = require('async');
 const schemas = require('../models/schemas');
 
 // courseCRUD.createMultipleCourses({ title: "Project Tech" });
 const createCourse = async (docObject) => {
-    const course = new CourseModel(docObject);
+    const course = new schemas.Course(docObject);
 
     course.save((err) => {
         if (err) Promise.reject(err);
@@ -22,14 +23,17 @@ const createMultipleCourses = async (docObjects) => {
 // Return full course object
 const findCourseByQuery = async (key, equalTo) => {
     return new Promise((resolve, reject) => {
-        schemas.Course.find({ [`${key}`]: { "$eq": equalTo, "$exists": true } }, (err, result) => {
+        console.log("QUERY FUNCTION RECEIVED: " + equalTo);
+        schemas.Course.find({ [`${key}`]: equalTo }, (err, result) => {
             if (err) reject(err);
 
             if (!result.length) {
                 console.log('user not found');
             } else {
-                result.forEach((user) => {
-                    resolve(user);
+                result.forEach((course) => {
+                    console.log('course found: ');
+                    console.log(course);
+                    resolve(course);
                 })
             }
         });

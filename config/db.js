@@ -3,10 +3,6 @@ require('dotenv').config()
 const mongoose = require('mongoose');
 const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@teamcreator-db.9p0bn.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
-// Models
-const CourseModel = require('../models/course-model');
-const UserModel = require('../models/user-model');
-
 const connectDb = async () => {
     try {
         await mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
