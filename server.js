@@ -31,48 +31,6 @@ db.connectDb();
 
 app.get('/', (req, res) => {
   res.render('courses-overview', { layout: "default", userData: null, courseData: null });
-
-  // CRUD.findDocByQuery(schemas.User, "name.lastName", "Ikiz").then((user) => {
-  //   CRUD.getMultipleCollectionDetails(['courses', 'classes'], user.id).then((collectionDetails) => {
-  //     collectionDetails.forEach(item => {
-  //       if(item.collection == 'courses') {
-  //         console.log(item);
-  //       }
-  //     })
-  //   });
-  // });
-
-  // CRUD.createDoc(schemas.User,
-  //   {
-  //     name: {
-  //       firstName: "Robert",
-  //       lastName: "Spier"
-  //     },
-  //     username: "r-spier",
-  //     type: "teacher",
-  //     courses: ["6224bcc77bf06ea7c585fa27", "6224bcc77bf06ea7c585fa28"],
-  //     classes: ["6224c923e7640efb9f228d42", "6224c923e7640efb9f228d43", "6224c923e7640efb9f228d44"]
-  //   }
-  // ).then((result) => {
-  //   CRUD.updateDocWithUserId(schemas.Course, result.courses, result.id);
-  //   CRUD.updateDocWithUserId(schemas.Class, result.classes, result.id);
-  // });
-
-  // CRUD.createMultipleDocs(schemas.Course, [
-  //   {
-  //     title: "Front-end Development",
-  //     users: ["6224f3f3ac61ae236e27e94f"],
-  //     classes: ["6224c923e7640efb9f228d42", "6224c923e7640efb9f228d43", "6224c923e7640efb9f228d44"]
-  //   },
-  //   {
-  //     title: "Project Tech",
-  //     users: ["6224f3f3ac61ae236e27e94f"],
-  //     classes: ["6224c923e7640efb9f228d42", "6224c923e7640efb9f228d43", "6224c923e7640efb9f228d44"]
-  //   },
-  //   {
-  //     title: "Front-end voor Designers"
-  //   }
-  // ])
 });
 
 app.get('/:username/courses', (req, res) => {
@@ -89,6 +47,8 @@ app.get('/:username/courses', (req, res) => {
 });
 
 app.get('/:username/courses/:course/classes', (req, res) => {
+  const baseURL = req.path;
+
   CRUD.findDocByQuery(schemas.Course, "linkRef", req.params.course).then((paramCourse) => {
     console.log('found course from url: ' + paramCourse.linkRef);
 
@@ -104,14 +64,26 @@ app.get('/:username/courses/:course/classes', (req, res) => {
             console.log("found paramCourse in TeacherCourse collection ");
 
             schemas.Class.find({ "_id": { $in: teacherCourse.classIds}}, (err, classData) => {
-              console.log(classData);
-              res.render('classes-overview', { layout: "default", root: global.appRoot, userData: user, courseData: paramCourse, courseTitle: paramCourse.title, classData: classData});
+              res.render('classes-overview', { layout: "default", root: global.appRoot, prevURL: '/' + req.params.username + '/courses/', baseURL: baseURL, userData: user, courseData: paramCourse, bannerTitle: paramCourse.title, bannerSubtitle: "Klassenoverzicht", classData: classData});
             }).lean();
           }
         });
       });
     })  
   })
+});
+
+app.get('/:username/courses/:course/classes/:class', function(req, res){
+  // get course object
+  CRUD.findDocByQuery(schemas.Course, "linkRef", req.params.course).then((courseData) => {
+    // get class object
+    CRUD.findDocByQuery(schemas.Class, "linkRef", req.params.class).then((classObject) => {
+      // insert user info based on id
+      schemas.Class.findById(classObject.id).lean().populate('users').exec(function (err, classData) { 
+        res.render('class-details', { layout: "default-yellow", root: global.appRoot, prevURL: '/' + req.params.username + '/courses/' + req.params.course + '/classes', userData: classData.users, bannerTitle: classData.title, bannerSubtitle: classData.users.length + " studenten", courseData: courseData, classData: classData});
+      });
+    });
+  });
 });
 
 app.get('*', function(req, res){

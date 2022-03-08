@@ -1,12 +1,12 @@
 {{> title-banner}}
 
 <main>
-    <h2>Jouw {{courseAcr}} klassen</h2>
+    <h2>Jouw klassen</h2>
 
     <ol class="grid grid--overview">
         {{#each classData}}
             <li>
-                <a class="box-shadow" href="#">
+                <a class="box-shadow" href="{{../baseURL}}/{{linkRef}}">
                     <div>
                         <h3>{{title}}</h3>
                         <p>{{users.length}} studenten</p>

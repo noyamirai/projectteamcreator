@@ -67,6 +67,7 @@ body {
   background-color: var(--white-color);
 
   min-height: 100vh;
+  width: 100%;
 }
 
 img {
@@ -86,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Heading 1 */
 h1 {
-  font-size: 32px; font-size: 3.2rem;
+  font-size: 24px; font-size: 2.4rem;
 }
 
 /* Heading 2 */
@@ -192,13 +193,15 @@ header {
   justify-content: center;
   flex-direction: column;
   
+  padding: 0 76px;
+
   height: 200px;
 
   text-align: center;
 
   background-color: var(--primary-color);
 
-  z-index: -5;
+  /* z-index: -5; */
 }
 
 /* pencil illustrations */
@@ -328,7 +331,6 @@ header::after {
     color: var(--white-color);
     background-color: var(--secondary-color);
     border-radius: var(--border-radius);
-
     line-height: normal;
     z-index: 10;
   }
@@ -363,6 +365,9 @@ header::after {
     border-radius: var(--border-radius);
 
     background-color: var(--white-color);
+    cursor: pointer;
+    z-index: 20;
+    transition: all 150ms ease-in-out;
   }
 
     header > a img {
@@ -398,6 +403,10 @@ main {
 
   .grid li {
     position: relative;
+  }
+  .grid--img li {
+    max-width: 70px;
+    max-height: 70px;
   }
 
     .grid li a:hover {
@@ -537,7 +546,7 @@ button, .btn {
   transition: all 150ms ease-in-out;
 }
 
-button:hover, .btn:hover {
+button:hover, .btn:hover, header > a:hover {
   transform: scale(1.02);
 }
 

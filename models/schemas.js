@@ -28,7 +28,11 @@ const classSchema = new mongoose.Schema({
         required: [true, 'Why no class name?']
     },
     users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
+    courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+    linkRef: {
+        type: String,
+        required: [true, 'Why no ref?']
+    }
 }, { collection: 'classes' }, { toJSON: { virtuals: true }});
 
 const userSchema = new mongoose.Schema({

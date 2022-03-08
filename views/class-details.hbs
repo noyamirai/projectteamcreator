@@ -2,41 +2,13 @@
 
 <main>
     <ul class="grid grid--overview grid--img">
+        {{#each userData}}
         <li>
             <a class="box-shadow" href="#">
-                <img src="https://avatars.githubusercontent.com/u/6113643?v=4" alt="Robert Spier">
+                <img src="{{profile_pic}}" alt="Profielfoto van {{name.first}} {{name.last}}">
             </a>
         </li>
-        <li>
-            <a class="box-shadow" href="#">
-                <img src="https://avatars.githubusercontent.com/u/6113643?v=4" alt="Robert Spier">
-            </a>
-        </li>
-        <li>
-            <a class="box-shadow" href="#">
-                <img src="https://avatars.githubusercontent.com/u/6113643?v=4" alt="Robert Spier">
-            </a>
-        </li>
-        <li>
-            <a class="box-shadow" href="#">
-                <img src="https://avatars.githubusercontent.com/u/6113643?v=4" alt="Robert Spier">
-            </a>
-        </li>
-        <li>
-            <a class="box-shadow" href="#">
-                <img src="https://avatars.githubusercontent.com/u/6113643?v=4" alt="Robert Spier">
-            </a>
-        </li>
-        <li>
-            <a class="box-shadow" href="#">
-                <img src="https://avatars.githubusercontent.com/u/6113643?v=4" alt="Robert Spier">
-            </a>
-        </li>
-        <li>
-            <a class="box-shadow" href="#">
-                <img src="https://avatars.githubusercontent.com/u/6113643?v=4" alt="Robert Spier">
-            </a>
-        </li>
+        {{/each}}
     </ul>
 
     <button>Teams maken</button>
