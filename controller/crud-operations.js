@@ -41,34 +41,48 @@ const findDocByQuery = async (schema, property, equalTo) => {
     })
 }
 
-const updateDocWithUserId = async (schema, docIds, userId) => {
-    if (!Array.isArray(docIds)) {
+const addIdReferenceToDoc = async (schemaToFind, docIds, referenceSchemas, referenceIds) => {
+    // one doc to be updated with single user id
+    if (!Array.isArray(docIds) && !Array.isArray(referenceIds)) {
         console.log('locating doc id: ' + docIds);
-        await findDocByQuery(schema, "_id", docIds).then((doc) => {
-            doc.users.push(userId);
+        await findDocByQuery(schemaToFind, "_id", docIds).then((doc) => {
+            doc[referenceSchemas].push(referenceIds);
             doc.save();
         })
+    // one doc to be updated with multiple user ids
+    } else if (!Array.isArray(docIds) && Array.isArray(referenceIds)) {
+        console.log('locating doc id: ' + docIds);
+
+        for (let id in referenceIds) {
+            await findDocByQuery(schemaToFind, "_id", docIds).then((doc) => {
+                doc[referenceSchemas].push(id);
+                doc.save();
+            })
+        }
+
+    // multiple docs to be updated with single user id
+    } else if (Array.isArray(docIds) && !Array.isArray(referenceIds)) {
+        console.log('doc ids: ' + docIds);
+
+        for (let id of docIds) {
+            console.log("locating doc: " + id);
+            await findDocByQuery(schemaToFind, "_id", id).then((doc) => {
+                doc[referenceSchemas].push(referenceIds);
+                doc.save();
+            })
+        }
+
+    // multiple docs to be updated with multiple user ids
     } else {
         console.log('doc ids: ' + docIds);
 
         for (let id of docIds) {
             console.log("locating doc: " + id);
             await findDocByQuery(schema, "_id", id).then((doc) => {
-                doc.users.push(userId);
-                doc.save();
-            })
-        }
-    }
-}
-
-const updateDocWithMultipleUserIds = async (schema, userObjects, property) => {
-    for (let user of userObjects) {
-        console.log("locating property: " + user[property]);
-        
-        for (let id of user[property]) {
-            await findDocByQuery(schema, "_id", id).then((doc) => {
-                doc.users.push(user.id);
-                doc.save();
+                for(let userId in userIds) {
+                    doc[referenceSchemas].push(userId);
+                    doc.save();
+                }
             })
         }
     }
@@ -139,14 +153,31 @@ const getUsersWithType = async (userId, type) => {
     });
 }
 
+const getClassIdsFromTeacherCourses = async (allTeacherCourses) => {
+    let classIds = [];
+    return new Promise((resolve, reject) => {
+        for (let index = 0; index < allTeacherCourses.length; index++) {
+            const course = allTeacherCourses[index];
+
+            // console.log(course.classIds);
+            classIds.push({ courseId: course.courseId, classIds: course.classIds });
+            
+            if(classIds.length == allTeacherCourses.length) {
+                resolve(classIds);
+            }
+        }
+
+    });
+}
+
 module.exports = {
     createDoc,
     createMultipleDocs,
     findDocByQuery,
-    updateDocWithUserId,
-    updateDocWithMultipleUserIds,
+    addIdReferenceToDoc,
     getUserCourses,
     getCollectionDetails,
     getMultipleCollectionDetails,
-    getUsersWithType
+    getUsersWithType,
+    getClassIdsFromTeacherCourses
 };

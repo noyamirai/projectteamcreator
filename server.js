@@ -6,6 +6,9 @@ const handlebars = require('express-handlebars');
 const paramCase = require('param-case');
 const bodyParser = require('body-parser');
 
+const rootPath = require('path');
+global.appRoot = rootPath.resolve(__dirname);
+
 const db = require('./config/db');
 
 const acronymGen = require('./public/js/acronym-generator');
@@ -75,45 +78,40 @@ app.get('/', (req, res) => {
 app.get('/:username/courses', (req, res) => {
   const baseURL = req.path;
 
-  CRUD.findDocByQuery(schemas.User, "username", req.params.username).then((user) => {
-    // Get course information of user with their id
-    CRUD.getCollectionDetails(schemas.User, 'courses', user.id).then((courses) => {
-      // loop through array to get objects
-      courses.forEach(course => {
-        // create link for each course
-        course.acronym = acronymGen.createAcronym(course.title);
-      });
-      res.render('courses-overview', { layout: "default", baseURL: baseURL, userData: user, courseData: courses });
+  CRUD.findDocByQuery(schemas.User, "username", req.params.username).then((userData) => {
+    schemas.TeacherCourse.find({ "userId": userData.id }).lean().populate('courseId').exec(function (err, courseData) { 
+      courseData.forEach(course => {
+        course.acronym = acronymGen.createAcronym(course.courseId.title);
+      })
+      res.render('courses-overview', { layout: "default", root: global.appRoot, baseURL: baseURL, userData: userData, courseData: courseData});
     });
   });
 });
 
 app.get('/:username/courses/:course/classes', (req, res) => {
-  let classData;
-  let courseTitle;
-  let courseAcr;
+  CRUD.findDocByQuery(schemas.Course, "linkRef", req.params.course).then((paramCourse) => {
+    console.log('found course from url: ' + paramCourse.linkRef);
 
-  CRUD.findDocByQuery(schemas.User, "username", req.params.username).then((user) => {
+    CRUD.findDocByQuery(schemas.User, "username", req.params.username).then((user) => {
+      console.log('retreived user: ' + user.username);
+      
+      schemas.TeacherCourse.find({ "userId": user.id }, (err, allTeacherCourses) => {
+        if (err) Promise.reject(err);
+        console.log('we are looking for the id from paramCourse: ' + paramCourse.id);
 
-    CRUD.getMultipleCollectionDetails(['courses', 'classes'], user.id).then((collectionDetails) => {
-      collectionDetails.forEach(item => {
-        if(item.collection == 'classes') {
-          classData = item.details;
-        } else if (item.collection == "courses") {
-          for (let index = 0; index < item.details.length; index++) {
-            const element = item.details[index];
-            element.acronym = acronymGen.createAcronym(element.title);
-            if(element.linkRef == req.params.course) {
-              courseTitle = element.title;
-              courseAcr = element.acronym;
-            }
+        allTeacherCourses.forEach(teacherCourse => {
+          if(teacherCourse.courseId ==  paramCourse.id) {
+            console.log("found paramCourse in TeacherCourse collection ");
+
+            schemas.Class.find({ "_id": { $in: teacherCourse.classIds}}, (err, classData) => {
+              console.log(classData);
+              res.render('classes-overview', { layout: "default", root: global.appRoot, userData: user, courseData: paramCourse, courseTitle: paramCourse.title, classData: classData});
+            }).lean();
           }
-        }
-      })
-
-      res.render('classes-overview', { layout: "default", userData: user, courseAcr: courseAcr, courseTitle: courseTitle, classData: classData });
-    })
-  });
+        });
+      });
+    })  
+  })
 });
 
 app.get('*', function(req, res){

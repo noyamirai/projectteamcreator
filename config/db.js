@@ -7,13 +7,22 @@ const connectDb = async () => {
     try {
         await mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
-        console.log("DB connected");        
+        console.log("DB connected");     
     } catch (error) {
         console.log(`error occured while trying to connect to db: ${error}`);
         throw error;
     }
 }
 
+const emptyDb = async () => {
+    const collections = await mongoose.connection.db.collections();
+
+    for (let collection of collections) {
+        await collection.deleteMany({})
+    }   
+}
+
 module.exports = {
-    connectDb
+    connectDb,
+    emptyDb
 };
