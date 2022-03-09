@@ -11,5 +11,51 @@
         {{/each}}
     </ul>
 
-    <button>Teams maken</button>
+    <img class="robot-img" src="{{../baseURL}}/public/images/cropped-cmd_icon_robot.png" alt="CMD Robot">
+
+    <button class="form-trigger">Teams aanmaken</button>
+        
+    <form action="/">
+        <fieldset>
+            <legend>Hoe groot mogen de teams zijn?</legend>
+            
+            <div>
+                <input type="radio" id="team-size-2" name="team-size" value="2" checked="true">
+                <label for="team-size-2"><span>Twee</span><span>studenten</span></label>
+            </div>
+
+            <div>
+                <input type="radio" id="team-size-3" name="team-size" value="3">
+                <label for="team-size-3"><span>Drie</span><span>studenten</span></label>
+            </div>
+
+            <div>
+                <input type="radio" id="team-size-4" name="team-size" value="4">
+                <label for="team-size-4"><span>Vier</span><span>studenten</span></label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Mogen leerlingen uit vorige teams weer in hetzelfde team?</legend>
+
+            <div class="toggle-container" id="toggle-container">
+                <div id="toggle-yes">
+                    <input type="radio" id="same-team-y" name="same-team" value="Yes, they can" checked="true">
+                    <label for="same-team-y"><span>Yes, they can</span></label>
+                </div>
+                
+                <div id="toggle-no">
+                    <input type="radio" id="same-team-n" name="same-team" value="No, they cannot">
+                    <label for="same-team-n"><span>No, they cannot</span></label>
+                </div>
+            </div>
+        </fieldset>
+
+        <div>
+            <button>Start</button>
+            <button id="close-form">Annuleren</button>
+        </div>
+    </form>
 </main>
+
+<script src="{{../baseURL}}/public/js/form-script.js"></script>

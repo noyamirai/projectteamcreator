@@ -70,6 +70,10 @@ body {
   width: 100%;
 }
 
+body.form {
+  overflow: hidden;
+}
+
 img {
   max-width: 100%;
   font-style: italic;
@@ -93,8 +97,10 @@ h1 {
 /* Heading 2 */
 h2 {
   font-size: 20px; font-size: 2.0rem;
+
   padding-bottom: 14px;
   margin-bottom: 20px;
+
   border-bottom: 3px solid var(--grey-color);
 }
 
@@ -182,6 +188,23 @@ ul, ol {
 .pink-item, .pink-item.box-shadow::after { background-color: var(--cmd-color-pink); }
 .yellow-item, .yellow-item.box-shadow::after { background-color: var(--primary-color); }
 
+.overlay::before {
+  content: "";;
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, .8);
+  z-index: 50;
+  transition: all 100ms ease-in-out;
+}
 /* =============================================================================
   #BANNER
 ============================================================================= */
@@ -200,7 +223,7 @@ header {
   text-align: center;
 
   background-color: var(--primary-color);
-
+  overflow: hidden;
   /* z-index: -5; */
 }
 
@@ -349,36 +372,6 @@ header::after {
 
     background-color: var(--white-color);
   }
-
-  /* Back button */
-  header > a {
-    position: absolute;
-
-    top: 24px;
-    left: 24px;
-
-    display: flex;
-    width: 40px;
-    height: 40px;
-
-    border: var(--border-settings);
-    border-radius: var(--border-radius);
-
-    background-color: var(--white-color);
-    cursor: pointer;
-    z-index: 20;
-    transition: all 150ms ease-in-out;
-  }
-
-    header > a img {
-      height: 16px;
-      width: auto;
-
-      margin: auto;
-
-      /* flip it */
-      transform: scaleX(-1);
-    }
 /* =============================================================================
   #MAIN
 ============================================================================= */
@@ -513,6 +506,228 @@ main {
       object-fit: cover;
       border-radius: var(--border-radius);
     }
+
+/* =============================================================================
+  #FORM
+============================================================================= */
+/* form trigger */
+.form-trigger {
+  z-index: 80;
+}
+
+form {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  transform: translateY(100%);
+
+  padding: 50px var(--default-padding) 158px var(--default-padding);
+
+  background-color: var(--white-color);
+
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  z-index: 100;
+
+  transition: transform 300ms ease-in-out;
+}
+
+form.form-active {
+  transform: translateY(0);
+}
+
+form > div {
+  position: fixed;
+  left: var(--default-padding);
+  right: var(--default-padding);
+
+  display: flex;
+  flex-direction: column;
+
+  bottom: var(--default-padding);
+}
+
+  form > div > button {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+  }
+
+  form > div > button:last-of-type {
+    background-color: var(--white-color);
+    color: var(--grey-text-color);
+    text-decoration: underline;
+  }
+
+form::before {
+  content: "";
+
+  position: absolute;
+  top: 16px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 65px;
+  height: 4px;
+
+  border-radius: 4px;
+
+  background-color: var(--grey-color);
+}
+
+  fieldset {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  fieldset + fieldset {
+    margin-top: var(--default-padding);
+  }
+
+    fieldset legend {
+      width: 100%;
+      font-size: 20px; font-size: 2.0rem;
+
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      
+      border-bottom: 3px solid var(--grey-color);
+    }
+
+    /* radio button containers */
+    fieldset div {
+      position: relative;
+      width: 33.33%;
+
+      border: var(--border-settings);
+      border-radius: var(--border-radius);
+
+      background-color: var(--white-color);
+    }
+
+    fieldset div + div {
+      margin-left: 8px;
+    }
+
+      fieldset div > label {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        padding: 12px;
+
+        background-color: transparent;
+
+        cursor: pointer;
+
+        transition: all 100ms ease-in-out;
+      }
+
+      fieldset div > label > span:first-of-type {
+        font-weight: 700;
+      }
+
+      fieldset div > label > span:last-of-type {
+        font-size: 14px; font-size: 1.4rem;
+        color: var(--grey-text-color);
+        margin-top: -4px;
+      }
+
+input[type="radio"], input[type="checkbox"] {
+  position: absolute;
+
+  visibility: hidden;
+  top: 0;
+  right: 0;
+  z-index: 5;
+}
+
+input[type="radio"]:checked + label {
+  background-color: var(--secondary-color);
+} 
+
+input[type="radio"]:checked+label, input[type="radio"]:checked+label>span:last-of-type {
+  color: var(--white-color);
+}
+
+/* TOGGLE BTN */
+.toggle-container {
+  display: flex;
+  flex-direction: row;
+
+  width: 100%;
+
+  background-color: transparent;
+}
+
+.toggle::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+
+    transform: translateX(0);
+
+    height: 100%;
+    width: 50%;
+
+    background-color: var(--secondary-color);
+
+    transition: 250ms ease-in-out;
+    z-index: 10;
+}
+
+.toggled::before {
+  transform: translateX(100%);
+}
+
+  .toggle-container > div {
+    display: flex;
+    justify-content: center;
+    
+    width: 50%;
+    
+    border: none;
+
+    cursor: pointer;
+    transition: color 50ms ease-in-out;
+  }
+
+    .toggle-container > div > label {
+      position: relative;
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+
+      .toggle-container > div > label > span:first-of-type {
+        z-index: 15;
+        color: var(--secondary-color);
+        font-size: 16px; font-size: 1.6rem;
+        margin-top: 0;
+      }
+
+  .toggle-container input[type="radio"]:checked + label {
+    background-color: var(--secondary-color);
+  }
+
+  .toggle-container > div + div {
+    margin-left: 0;
+  }
+
+  .toggle--active {
+    background-color: red;
+  }
+
 /* =============================================================================
   #BUTTON
 ============================================================================= */
@@ -546,14 +761,48 @@ button, .btn {
   transition: all 150ms ease-in-out;
 }
 
-button:hover, .btn:hover, header > a:hover {
+button:hover, .btn:hover, .btn--small:hover {
   transform: scale(1.02);
 }
 
+/* Back button */
+.btn--small {
+  position: absolute;
+
+  display: flex;
+  width: 40px;
+  height: 40px;
+
+  border: var(--border-settings);
+  border-radius: var(--border-radius);
+
+  background-color: var(--white-color);
+  cursor: pointer;
+  z-index: 80;
+  transition: all 150ms ease-in-out;
+}
+
+header .btn--small {
+  z-index: 20;
+  top: var(--default-padding);
+  left: var(--default-padding);
+}
+
+.btn--small img {
+  height: 16px;
+  width: auto;
+
+  margin: auto;
+}
+
+.btn--small-arrow img {
+  /* flip it */
+  transform: scaleX(-1);
+}
 /* =============================================================================
-  #FOOTER
+  #ROBOT FOOTER IMG
 ============================================================================= */
-body > img {
+.robot-img {
   position: absolute;
 
   bottom: 60px;
@@ -567,6 +816,12 @@ body > img {
   z-index: -10;
 }
 
+  .form .robot-img {
+    bottom: calc(60px + 50px);
+  }
+/* =============================================================================
+  #FOOTER
+============================================================================= */
 footer {
   padding: 12px var(--default-padding);
 }

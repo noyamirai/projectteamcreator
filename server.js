@@ -35,6 +35,8 @@ app.get('/', (req, res) => {
 
 app.get('/:username/courses', (req, res) => {
   const baseURL = req.path;
+    console.log('BASE URL: ' + baseURL);
+
 
   CRUD.findDocByQuery(schemas.User, "username", req.params.username).then((userData) => {
     schemas.TeacherCourse.find({ "userId": userData.id }).lean().populate('courseId').exec(function (err, courseData) { 
@@ -48,6 +50,7 @@ app.get('/:username/courses', (req, res) => {
 
 app.get('/:username/courses/:course/classes', (req, res) => {
   const baseURL = req.path;
+  console.log('BASE URL: ' + baseURL);
 
   CRUD.findDocByQuery(schemas.Course, "linkRef", req.params.course).then((paramCourse) => {
     console.log('found course from url: ' + paramCourse.linkRef);
@@ -80,7 +83,7 @@ app.get('/:username/courses/:course/classes/:class', function(req, res){
     CRUD.findDocByQuery(schemas.Class, "linkRef", req.params.class).then((classObject) => {
       // insert user info based on id
       schemas.Class.findById(classObject.id).lean().populate('users').exec(function (err, classData) { 
-        res.render('class-details', { layout: "default-yellow", root: global.appRoot, prevURL: '/' + req.params.username + '/courses/' + req.params.course + '/classes', userData: classData.users, bannerTitle: classData.title, bannerSubtitle: classData.users.length + " studenten", courseData: courseData, classData: classData});
+        res.render('class-details', { layout: "default-yellow", root: global.appRoot, prevURL: '/' + req.params.username + '/courses/' + req.params.course + '/classes', userData: classData.users, bannerTitle: classData.title, bannerSubtitle: classData.users.length + " studenten", courseData: courseData, classData: classData, className: "form"});
       });
     });
   });
