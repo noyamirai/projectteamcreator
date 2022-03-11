@@ -205,6 +205,14 @@ ul, ol {
   z-index: 50;
   transition: all 100ms ease-in-out;
 }
+
+.notransition * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  -ms-transition: none !important;
+  transition: none !important;
+}
 /* =============================================================================
   #BANNER
 ============================================================================= */
@@ -216,7 +224,7 @@ header {
   justify-content: center;
   flex-direction: column;
   
-  padding: 0 76px;
+  padding: 0 var(--default-padding);
 
   height: 200px;
 
@@ -767,29 +775,26 @@ button:hover, .btn:hover, .btn--small:hover {
 
 /* Back button */
 .btn--small {
-  position: absolute;
+  position: fixed;
+
+  bottom: var(--default-padding);
+  left: var(--default-padding);
 
   display: flex;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
 
   border: var(--border-settings);
   border-radius: var(--border-radius);
 
   background-color: var(--white-color);
   cursor: pointer;
-  z-index: 80;
+  z-index: 100;
   transition: all 150ms ease-in-out;
 }
 
-header .btn--small {
-  z-index: 20;
-  top: var(--default-padding);
-  left: var(--default-padding);
-}
-
 .btn--small img {
-  height: 16px;
+  height: 18px;
   width: auto;
 
   margin: auto;
@@ -799,6 +804,38 @@ header .btn--small {
   /* flip it */
   transform: scaleX(-1);
 }
+
+.btn--container {
+  position: fixed;
+
+  left: var(--default-padding);
+  right: var(--default-padding);
+  bottom: var(--default-padding);
+  
+  display: flex;
+  flex-direction: row;
+}
+
+  .btn--container > * {
+    position: relative;
+
+    top: auto;
+    left: auto;
+    bottom: auto;
+    right: auto;
+  }
+
+  .btn--container button {
+    width: 100%;
+  }
+
+  .btn--container a {
+    min-width: 50px;
+  }
+
+  .btn--container a + button {
+    margin-left: 10px;
+  }
 /* =============================================================================
   #ROBOT FOOTER IMG
 ============================================================================= */
