@@ -6,7 +6,7 @@
     <ol class="grid grid--overview">
         {{#each classData}}
             <li>
-                <a class="box-shadow" href="{{../baseURL}}/{{linkRef}}">
+                <a class="box-shadow" href="{{../baseURL}}/{{linkRef}}{{#if this.teams}}/home{{/if}}">
                     <div>
                         <h3>{{title}}</h3>
                         <p>{{students.length}} studenten</p>

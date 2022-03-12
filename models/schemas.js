@@ -35,7 +35,11 @@ const teamSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Why no class name?']
     },
-    students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
+    number: {
+        type: Number,
+        required: [true, 'Why no number to identify w?']
+    },
+    students: [{ student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' }, cmd_skill: { type: mongoose.Schema.Types.ObjectId, ref: 'cmdSkill' }}],
     class: { type: mongoose.Schema.Types.ObjectId, ref: 'Class' },
     course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' }
 }, { collection: 'teams' }, { toJSON: { virtuals: true }});

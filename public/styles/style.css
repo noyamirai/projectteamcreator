@@ -134,6 +134,7 @@ ul, ol {
 /* =============================================================================
   #UTILITIES
 ============================================================================= */
+.hide{ display: none!important; }
 .box-shadow>* {
   position: relative;
   z-index: 10;
@@ -181,6 +182,8 @@ ul, ol {
 .yellow-bg { background-color: var(--primary-color);}
 .yellow-bg .box-shadow::after { background-color: var(--white-color); }
 .yellow-bg main { border-top: var(--border-settings); }
+
+.loading main { border: none; }
 
 .orange-item, .orange-item.box-shadow::after { background-color: var(--cmd-color-orange); }
 .green-item, .green-item.box-shadow::after { background-color: var(--cmd-color-green); }
@@ -424,7 +427,7 @@ main {
   grid-template-columns: 1fr;
 }
 
-  .grid--list li a {
+  .grid--list li a, .grid--list .box-shadow {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -440,7 +443,7 @@ main {
   }
 
     /* Course profile pic */
-    .grid--list li a > p {
+    .grid--list li a > p, .grid--list .box-shadow > p {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -516,6 +519,104 @@ main {
     }
 
 /* =============================================================================
+  #TEAM DETAILS
+============================================================================= */
+.grid--list__team-members picture {
+  display: block;
+
+  width: 70px;
+  min-width: 70px;
+  height: 70px;
+
+  border: var(--border-settings);
+  border-radius: var(--border-radius);
+
+  margin-right: 14px;
+}
+
+  .grid--list__team-members picture > img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill;
+  }
+
+.grid--list__team-members div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+  .grid--list__team-members div > h3 {
+    position: relative;
+    display: inline-block;
+    padding: 8px 8px;
+    font-size: 14px; font-size: 1.4rem;
+
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    border-radius: 5px;
+
+    margin-bottom: 6px;
+    margin-right: auto;
+  }
+
+  .grid--list__team-members div > h3::before {
+    content: "";
+    position: absolute;
+
+    left: -9px;
+    top: 50%;
+
+    transform: translateY(-50%) rotate(-90deg);
+    
+    width: 14px;
+    height: 7px;
+
+    background-color: transparent;
+    background-image: url("../images/icons/name_tag-triangle-big.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .grid--list__team-members div > p {
+    display: inline-block;
+    
+    padding: 3px 10px;
+
+    text-align: center;
+    font-size: 14px; font-size:  1.4rem;
+    font-weight: 700;
+
+    border: var(--border-settings);
+    border-radius: 10px;
+    margin-right: auto;
+  }
+
+
+/* =============================================================================
+  #LOADING
+============================================================================= */
+body.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+  .loading h1 {
+    margin-bottom: 6px;
+  }
+
+  .loading img {
+    width: 100px;
+    height: auto;
+
+    margin-bottom: 12px;
+  }
+/* =============================================================================
   #FORM
 ============================================================================= */
 /* form trigger */
@@ -523,7 +624,7 @@ main {
   z-index: 80;
 }
 
-form {
+.form form {
   position: absolute;
 
   left: 0;
@@ -543,11 +644,11 @@ form {
   transition: transform 300ms ease-in-out;
 }
 
-form.form-active {
+.form form.form-active {
   transform: translateY(0);
 }
 
-form > div {
+.form form > div {
   position: fixed;
   left: var(--default-padding);
   right: var(--default-padding);
@@ -558,7 +659,7 @@ form > div {
   bottom: var(--default-padding);
 }
 
-  form > div > button {
+  .form form > div > button {
     position: relative;
     top: auto;
     bottom: auto;
@@ -566,13 +667,13 @@ form > div {
     right: auto;
   }
 
-  form > div > button:last-of-type {
+  .form form > div > button:last-of-type {
     background-color: var(--white-color);
     color: var(--grey-text-color);
     text-decoration: underline;
   }
 
-form::before {
+.form form::before {
   content: "";
 
   position: absolute;
@@ -816,6 +917,29 @@ button:hover, .btn:hover, .btn--small:hover {
   flex-direction: row;
 }
 
+.btn--container__center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+
+  transform: translate(-50%, -50%);
+}
+
+.btn--subtle {
+  color: var(--grey-text-color);
+  text-decoration: underline;
+}
+
+.btn--container__column {
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn--container__column > * + * {
+  margin-top: 12px;
+}
+
   .btn--container > * {
     position: relative;
 
@@ -831,6 +955,11 @@ button:hover, .btn:hover, .btn--small:hover {
 
   .btn--container a {
     min-width: 50px;
+  }
+
+  .btn--container__column a {
+    width: 100%;
+    text-align: center;
   }
 
   .btn--container a + button {

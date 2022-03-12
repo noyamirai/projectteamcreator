@@ -1,0 +1,70 @@
+
+{{#if memberView}}
+        {{> title-banner}}
+{{else}}
+    <header>
+        {{#each allTeams}}
+            <h1 class="hide teamHeading" id="team-heading-{{this.number}}">{{this.name}}</h1>
+        {{/each}}
+        <h3>Overzicht van studenten</h3>
+    </header>
+{{/if}}
+
+<main>
+    
+    {{#if memberView}}
+        <ul class="grid grid--list grid--list__team-members">
+            {{#each studentData}}
+                <li>
+                    <div class="box-shadow">
+                        <picture>
+                            <img src="{{this.student.user.profile_pic}}" alt="Profielfoto van {{this.student.user.name.first}} {{this.student.user.name.last}}">
+                        </picture>
+
+                        <div>
+                            <h3>{{this.student.user.name.first}} {{this.student.user.name.last}}</h3>
+                            <p>{{this.cmd_skill.skill}}</p>
+                        </div>
+
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+
+        <a class="btn--small btn--small-arrow" href="{{prevURL}}"><img src="{{../baseURL}}/public/images/icons/arrow-icon.svg" alt="Back icon"></a>
+
+    {{else}}
+        {{#each allTeams}}
+
+            <ul class="hide grid grid--list grid--list__team-members" id="team-{{this.number}}">
+                {{#each this.students}}
+                    <li>
+                        <div class="box-shadow">
+                            <picture>
+                                <img src="{{this.student.user.profile_pic}}" alt="Profielfoto van {{this.student.user.name.first}} {{this.student.user.name.last}}">
+                            </picture>
+
+                            <div>
+                                <h3>{{this.student.user.name.first}} {{this.student.user.name.last}}</h3>
+                                <p>{{this.cmd_skill.skill}}</p>
+                            </div>
+
+                        </div>
+                    </li>
+                {{/each}}
+                
+            </ul>
+        {{/each}}
+
+        <div class="btn--container btn--container__column">
+            <a class="btn" id="next-item">Volgende team</a>
+            <a class="btn--subtle" id="skip-all">Naar resultaten</a>
+        </div>
+    {{/if}}
+    
+</main>
+
+{{#if memberView}}
+{{else}}
+    <script async src="{{../baseURL}}/public/js/team-details-script.js"></script>
+{{/if}}
