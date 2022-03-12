@@ -6,9 +6,10 @@ const teamHeadingEl = document.querySelectorAll(".teamHeading");
 const nextItemBtn = document.querySelector("#next-item");
 const skipBtn = document.querySelector("#skip-all");
 
-let counter = 0;
 const amountOfTeams = teamListEl.length;
-console.log(amountOfTeams);
+
+let counter = 0;
+
 teamListEl[0].classList.toggle("hide");
 teamHeadingEl[0].classList.toggle("hide");
 

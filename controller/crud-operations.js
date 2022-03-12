@@ -1,5 +1,3 @@
-const schemas = require('../models/schemas');
-
 // courseCRUD.createMultipleCourses({ title: "Project Tech" });
 const createDoc = async (schema, object) => {
     return new Promise((resolve, reject) => {
@@ -88,96 +86,9 @@ const addIdReferenceToDoc = async (schemaToFind, docIds, referenceSchemas, refer
     }
 }
 
-// Finds user and uses their course ids and grabs corresponding objects from course collection
-const getUserCourses = async (id) => {
-    return new Promise((resolve, reject) => {
-        schemas.User.findOne({ id: id }).lean()
-
-        .populate('courses').exec((err, user) => {
-            if (err) reject(err);
-            resolve(user.courses);
-        });
-    });
-}
-
-const getCollectionDetails = async (schema, collection, id) => {
-    return new Promise((resolve, reject) => {
-        schema.findOne({ id: id }).lean()
-
-        .populate(collection).exec((err, user) => {
-            if (err) reject(err);
-            resolve(user[collection]);
-        });
-    });
-}
-
-const getMultipleCollectionDetails = async (collections, id) => {
-    return new Promise((resolve, reject) => {
-        let details = [];
-        if (!Array.isArray(collections)) {
-            schemas.User.findOne({ "_id": id }).lean()
-
-            .populate(collections).exec((err, user) => {
-                if (err) reject(err);
-                resolve(user[collections]);
-            });
-        } else {
-           collections.forEach(collection => {
-               schemas.User.findOne({ "_id": id }).lean()
-
-                .populate(collection).exec((err, user) => {
-                    if (err) reject(err);
-                    details.push(
-                        {
-                            collection: collection,
-                            details: user[collection]
-                        }
-                    );
-                    
-                    if (details.length == collections.length) {
-                        resolve(details);
-                    }
-                });
-           })
-        }
-    });
-}
-
-const getUsersWithType = async (userId, type) => {
-    return new Promise((resolve, reject) => {
-        // find each person with a type matching provided type
-        schemas.User.find({ id: userId, type: { "$eq": type, "$exists": true } }, (err, user) => {
-            if (err) reject(err);
-            resolve(user);
-        });
-    });
-}
-
-const getClassIdsFromTeacherCourses = async (allTeacherCourses) => {
-    let classIds = [];
-    return new Promise((resolve, reject) => {
-        for (let index = 0; index < allTeacherCourses.length; index++) {
-            const course = allTeacherCourses[index];
-
-            // console.log(course.classIds);
-            classIds.push({ courseId: course.courseId, classIds: course.classIds });
-            
-            if(classIds.length == allTeacherCourses.length) {
-                resolve(classIds);
-            }
-        }
-
-    });
-}
-
 module.exports = {
     createDoc,
     createMultipleDocs,
     findDocByQuery,
-    addIdReferenceToDoc,
-    getUserCourses,
-    getCollectionDetails,
-    getMultipleCollectionDetails,
-    getUsersWithType,
-    getClassIdsFromTeacherCourses
+    addIdReferenceToDoc
 };
