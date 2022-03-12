@@ -20,15 +20,12 @@
   "dependencies": {
     "async": "^3.2.3",
     "body-parser": "^1.19.2",
-    "camelcase": "^6.3.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-handlebars": "^6.0.3",
     "mongodb": "^4.4.0",
     "mongoose": "^6.2.4",
-    "param-case": "^3.0.4",
-    "title-case": "^3.0.3",
-    "uniqid": "^5.4.0"
+    "param-case": "^3.0.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
