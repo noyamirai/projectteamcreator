@@ -29,5 +29,8 @@
     "param-case": "^3.0.4",
     "title-case": "^3.0.3",
     "uniqid": "^5.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
