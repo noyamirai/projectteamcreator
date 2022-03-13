@@ -915,6 +915,7 @@ button:hover, .btn:hover, .btn--small:hover {
   
   display: flex;
   flex-direction: row;
+  z-index: 50;
 }
 
 .btn--container__center {

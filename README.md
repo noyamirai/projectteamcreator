@@ -27,7 +27,7 @@ npm start
 
 Running the application with nodemon
 ~~~
-npm start:dev
+npm run start:dev
 ~~~
 
 Both these prompts will give you access via localhost:3000. And That's it! Have any trouble? Feel free to let us know by submitting an issue. (no e-mail yet :stuck_out_tongue:)

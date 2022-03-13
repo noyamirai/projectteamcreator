@@ -1,16 +1,19 @@
-const formTriggerBtn = document.querySelector(".form-trigger");
-const bodyEl = document.querySelector("body");
-const formEl = document.querySelector("form");
-const closeFormBtn = document.querySelector("#close-form");
+const formTriggerBtn = document.querySelector(`.form-trigger`);
+const bodyEl = document.querySelector(`body`);
+const formEl = document.querySelector(`form`);
+const closeFormBtn = document.querySelector(`#close-form`);
 
-formTriggerBtn.addEventListener("click", event => {
-    bodyEl.classList.toggle("overlay");
-    formEl.classList.toggle("form-active");
+const toggleClass = () => {
+    bodyEl.classList.toggle(`overlay`);
+    formEl.classList.toggle(`form-active`);
+}
+
+formTriggerBtn.addEventListener(`click`, event => {
+    toggleClass();
 });
 
-closeFormBtn.addEventListener("click", event => {
+closeFormBtn.addEventListener(`click`, event => {
     event.preventDefault();
     
-    bodyEl.classList.toggle("overlay");
-    formEl.classList.toggle("form-active");
+    toggleClass();
 });

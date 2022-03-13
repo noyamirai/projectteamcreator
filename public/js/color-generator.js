@@ -1,7 +1,7 @@
-console.log("COLOR GENERATOR SCRIPT UP & RUNNING :D");
+console.log(`COLOR GENERATOR SCRIPT UP & RUNNING :D`);
 
-const boxShadowItems = document.querySelectorAll(".box-shadow");
-const colorOptions = ["orange", "blue", "pink", "green", "yellow"];
+const boxShadowItems = document.querySelectorAll(`.box-shadow`);
+const colorOptions = [`orange`, `blue`, `pink`, `green`, `yellow`];
 
 let counter = 0;
 
@@ -10,7 +10,7 @@ let pickFromMe = [];
 
 // Only get the list items (profile pic has box-shadow class too)
 boxShadowItems.forEach(element => {
-    if (element.parentNode.nodeName.toLowerCase() == "li") {
+    if (element.parentNode.nodeName.toLowerCase() == `li`) {
         listItems.push(element);
     }
 });
