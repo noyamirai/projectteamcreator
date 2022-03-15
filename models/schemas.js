@@ -6,29 +6,62 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: [true, `Why no course Title?`]
     },
-    students: [{ type: mongoose.Schema.Types.ObjectId, ref: `Student` }],
-    teachers: [{ type: mongoose.Schema.Types.ObjectId, ref: `Teacher` }],
-    classes: [{ type: mongoose.Schema.Types.ObjectId, ref: `Class` }],
+    students: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Student`
+    }],
+    teachers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Teacher`
+    }],
+    classes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Class`
+    }],
     linkRef: {
         type: String,
         required: [true, `Why no ref?`]
     }
-}, { collection: `courses` }, { toJSON: { virtuals: true }});
+}, {
+    collection: `courses`
+}, {
+    toJSON: {
+        virtuals: true
+    }
+});
 
 const classSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, `Why no class name?`]
     },
-    students: [{ type: mongoose.Schema.Types.ObjectId, ref: `Student` }],
-    teachers: [{ type: mongoose.Schema.Types.ObjectId, ref: `Teacher` }],
-    courses: [{ type: mongoose.Schema.Types.ObjectId, ref: `Course` }],
-    teams: [{ type: mongoose.Schema.Types.ObjectId, ref: `Team` }],
+    students: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Student`
+    }],
+    teachers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Teacher`
+    }],
+    courses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Course`
+    }],
+    teams: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Team`
+    }],
     linkRef: {
         type: String,
         required: [true, `Why no ref?`]
     }
-}, { collection: `classes` }, { toJSON: { virtuals: true }});
+}, {
+    collection: `classes`
+}, {
+    toJSON: {
+        virtuals: true
+    }
+});
 
 const teamSchema = new mongoose.Schema({
     name: {
@@ -39,10 +72,30 @@ const teamSchema = new mongoose.Schema({
         type: Number,
         required: [true, `Why no number to identify w?`]
     },
-    students: [{ student: { type: mongoose.Schema.Types.ObjectId, ref: `Student` }, cmd_skill: { type: mongoose.Schema.Types.ObjectId, ref: `cmdSkill` }}],
-    class: { type: mongoose.Schema.Types.ObjectId, ref: `Class` },
-    course: { type: mongoose.Schema.Types.ObjectId, ref: `Course` }
-}, { collection: `teams` }, { toJSON: { virtuals: true }});
+    students: [{
+        student: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: `Student`
+        },
+        cmd_skill: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: `cmdSkill`
+        }
+    }],
+    class: {
+        type: mongoose.Schema.Types.ObjectId, ref: `Class`
+    },
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Course`
+    }
+}, {
+    collection: `teams`
+}, {
+    toJSON: {
+        virtuals: true
+    }
+});
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -77,8 +130,14 @@ const userSchema = new mongoose.Schema({
     profile_pic: {
         type: String,
     },
-    classes:  [{ type: mongoose.Schema.Types.ObjectId, ref: `Class` }],
-    courses:  [{ type: mongoose.Schema.Types.ObjectId, ref: `Course` }],
+    classes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Class`
+    }],
+    courses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Course`
+    }],
     type: {
         type: String,
         required: [true, `Why no user type?`]
@@ -87,41 +146,107 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, `Why no admin rights specified?`]
     }
-}, { collection: `users` }, { toJSON: { virtuals: true }});
+}, {
+    collection: `users`
+}, {
+    toJSON: {
+        virtuals: true
+    }
+});
 
 const userStudent = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: `User` },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `User`
+    },
     cmd_skills: {
         type: Object,
         required: [true, `Why no CMD skills?`],
         properties: {
-            best: [{ type: mongoose.Schema.Types.ObjectId, ref: `cmdSkill` }],
-            want_to_learn: [{ type: mongoose.Schema.Types.ObjectId, ref: `cmdSkill` }]
+            best: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: `cmdSkill`
+            }],
+            want_to_learn: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: `cmdSkill`
+            }]
         }
     },
-    teams:  [{ type: mongoose.Schema.Types.ObjectId, ref: `Team` }],
-    classes:  [{ type: mongoose.Schema.Types.ObjectId, ref: `Class` }],
-    courses:  [{ type: mongoose.Schema.Types.ObjectId, ref: `Course` }]
-}, { collection: `students` }, { toJSON: { virtuals: true }});
+    teams: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Team`
+    }],
+    classes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Class`
+    }],
+    courses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Course`
+    }]
+}, {
+    collection: `students`
+}, {
+    toJSON: {
+        virtuals: true
+    }
+});
 
 const userTeacher = new mongoose.Schema({
-    user: { type: mongoose.Schema.Types.ObjectId, ref: `User` },
-    classes:  [{ type: mongoose.Schema.Types.ObjectId, ref: `Class` }],
-    courses:  [{ type: mongoose.Schema.Types.ObjectId, ref: `Course` }]
-}, { collection: `teachers` }, { toJSON: { virtuals: true }});
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `User`
+    },
+    classes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Class`
+    }],
+    courses: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Course`
+    }]
+}, {
+    collection: `teachers`
+}, {
+    toJSON: {
+        virtuals: true
+    }
+});
 
 const cmdSkillSchema = new mongoose.Schema({
     skill: {
         type: String,
         required: [true, `Why no skill defined?`]
     }
-}, { collection: `cmd_skills` }, { toJSON: { virtuals: true }});
+}, {
+    collection: `cmd_skills`
+}, {
+    toJSON: {
+        virtuals: true
+    }
+});
 
 const teacherCourse = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: `User` }, 
-    course: { type: mongoose.Schema.Types.ObjectId, ref: `Course` }, 
-    classes: [{ type: mongoose.Schema.Types.ObjectId, ref: `Class` }]
-}, { collection: `classes` }, { toJSON: { virtuals: true }});
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `User`
+    },
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Course`
+    },
+    classes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `Class`
+    }]
+}, {
+    collection: `classes`
+}, {
+    toJSON: {
+        virtuals: true
+    }
+});
 
 const Course = mongoose.model(`Course`, courseSchema, `courses`);
 

@@ -14,6 +14,6 @@ formTriggerBtn.addEventListener(`click`, event => {
 
 closeFormBtn.addEventListener(`click`, event => {
     event.preventDefault();
-    
+
     toggleClass();
 });

@@ -16,7 +16,7 @@ boxShadowItems.forEach(element => {
 });
 
 const randomizer = () => {
-   return number = Math.floor(Math.random() * 5);
+    return number = Math.floor(Math.random() * 5);
 }
 
 // Generates x amount of random numbers based on a set length and adds these to provided array
@@ -32,12 +32,12 @@ const generator = (array, maxLength, amount) => {
         } else {
             // try again until success
             generator(array, maxLength, amount);
-        }   
+        }
     } else {
         // grab items from first array batch based on amount of remainders
         // example: [1,3,0,4,2] -> 2 remainders, so first two items (1 and 3) will be added
         counter++;
-        array.push(array[counter-1]);
+        array.push(array[counter - 1]);
     }
 }
 
@@ -46,13 +46,13 @@ const assignColor = (item, chosenOption) => {
     const randomOption = colorOptions[chosenOption];
 
     colorOptions.forEach(color => {
-       if(randomOption == color) {
+        if (randomOption == color) {
             item.classList.add(`${randomOption}-item`);
-       } 
+        }
     });
 }
 
-for (let i = 0; i < listItems.length; i++) {   
+for (let i = 0; i < listItems.length; i++) {
     generator(pickFromMe, colorOptions.length, listItems.length);
     assignColor(listItems[i], pickFromMe[i]);
 }
