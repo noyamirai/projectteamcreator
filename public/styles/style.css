@@ -106,11 +106,7 @@ h2 {
 }
 
 .overflow h2 {
-  margin: 0 20px var(--default-padding) var(--default-padding);
-}
-
-.overflow--white h2 {
-  margin-bottom: 0;
+  margin: 0 20px 0 var(--default-padding);
 }
 
 /* Heading 3 */
@@ -195,7 +191,7 @@ ul, ol {
 
 .yellow-bg { background-color: var(--primary-color);}
 .yellow-bg .box-shadow::after { background-color: var(--white-color); }
-.yellow-bg main { border-top: var(--border-settings); }
+.yellow-bg header { border-bottom: var(--border-settings); }
 
 .loading main { border: none; }
 
@@ -243,7 +239,7 @@ header {
   
   padding: 0 var(--default-padding);
 
-  height: 200px;
+  height: 180px;
 
   text-align: center;
 
@@ -398,50 +394,19 @@ header::after {
     background-color: var(--white-color);
   }
 /* =============================================================================
-  #MAIN
+  #OVERFLOW
 ============================================================================= */
-main {
-  position: relative;
+/* .overflow main {
+    position: initial;
 
-  padding: var(--default-padding) 0 100px 0px;
-  margin: 0 var(--default-padding);
+    width: 100%;
+    height: calc(100vh - 200px);
 
-  min-height: calc(100vh - 200px);
-
-  min-height: -webkit-fill-available;
+    margin: 0;
+    padding: 0 0 80px 0;
 }
 
-.yellow-bg .overflow main {
-  margin: 0;
-}
-
-  .yellow-bg .overflow main .grid--list__team-members {
-    padding: 0px var(--default-padding);
-  }
-
-.overflow main {
-  position: initial;
-
-  width: 100%;
-  height: calc(100vh - 200px);
-
-  margin: 0;
-  padding: 0 0 80px 0;
-}
-
-.overflow--white main {
-   padding: var(--default-padding) 0 80px 0; 
-}
-
-.overflow--teams main {
-    padding: 0 0 140px 0;
-}
-
-.yellow-bg .overflow main {
-    padding: 0px 0px 110px 0px;
-}
-
-/* .overflow main::before {
+ .overflow main::before {
   content: "";
   position: absolute;
 
@@ -455,11 +420,83 @@ main {
   background-color: var(--secondary-color);
 
   z-index: 50;
+}
+
+.overflow .grid--list, .overflow .grid--img {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: visible;
+
+    padding: var(--default-padding) var(--default-padding) 30px var(--default-padding);
+}
+
+.overflow--teams .grid--list {
+    grid-auto-rows: min-content;
+    height: 100% !important;
+}
+
+.yellow-bg .overflow .grid--list, .yellow-bg .overflow .grid--img {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: visible;
+
+    padding: var(--default-padding);
+}
+
+.overflow .grid--list {
+    height: calc(100% - 39px);
+}
+
+.yellow-bg .overflow .grid--list {
+    height: calc(100% - 40px);
+}
+
+.overflow .grid--img {
+    height: 100%;
+    grid-auto-rows: min-content;
 } */
 
-.overflow--teams main::before {
-    bottom: 140px;
+
+/* =============================================================================
+  #MAIN
+============================================================================= */
+main {
+  position: relative;
+
+  padding: var(--default-padding) 0 110px 0px;
+  margin: 0 var(--default-padding);
+
+  min-height: calc(100vh - 180px);
+
+  min-height: -webkit-fill-available;
 }
+
+.overflow main {
+  margin: 0;
+  padding: 0 0 0 0;
+  height: calc(100vh - 260px);
+}
+
+.overflow--white main {
+  padding-top: var(--default-padding);
+}
+
+.overflow--teams main {
+  height: calc(100vh - 300px);
+}
+
+  .overflow main .grid {
+    padding: var(--default-padding);
+
+    overflow-y: scroll;
+    height: 100%;
+
+    grid-auto-rows: min-content;
+  }
+
+  .overflow--white main .grid {
+    padding: var(--default-padding) var(--default-padding) 63px var(--default-padding);
+  }
 
 .grid {
   display: grid;
@@ -476,11 +513,12 @@ main {
   }
 
   .grid li {
-    position: relative;
+      position: relative;
   }
+
   .grid--img li {
-    max-width: 70px;
-    max-height: 70px;
+      max-width: 70px;
+      max-height: 70px;
   }
 
     .grid li a:hover {
@@ -495,40 +533,6 @@ main {
 
 .grid--list {
   grid-template-columns: 1fr;
-}
-
-.overflow .grid--list, .overflow .grid--img {
-  position:relative;
-  overflow-y: scroll;
-  overflow-x: visible;
-
-  padding: var(--default-padding) var(--default-padding) 30px var(--default-padding);
-}
-
-.overflow--teams .grid--list {
-  grid-auto-rows: min-content;
-  height: 100%!important;
-}
-
-.yellow-bg .overflow .grid--list, .yellow-bg .overflow .grid--img {
-  position:relative;
-  overflow-y: scroll;
-  overflow-x: visible;
-
-  padding: var(--default-padding);
-}
-
-.overflow .grid--list {
-  height: calc(100% - 39px);
-}
-
-.yellow-bg .overflow .grid--list {
-  height: calc(100% - 40px);
-}
-
-.overflow .grid--img {
-  height: 100%;
-  grid-auto-rows: min-content;
 }
 
   .grid--list li a, .grid--list .box-shadow {
@@ -546,6 +550,10 @@ main {
     border-radius: var(--border-radius);
 
     transition: all .25s ease-in-out;
+  }
+
+  .grid--list__team-members .box-shadow {
+    padding: 12px 14px;
   }
 
     /* Course profile pic */
@@ -633,9 +641,9 @@ main {
 .grid--list__team-members picture {
   display: block;
 
-  width: 70px;
-  min-width: 70px;
-  height: 70px;
+  width: 55px;
+  min-width: 55px;
+  height: 55px;
 
   border: var(--border-settings);
   border-radius: var(--border-radius);
@@ -648,6 +656,7 @@ main {
     height: 100%;
 
     object-fit: fill;
+    border-radius: 3px;
   }
 
 .grid--list__team-members div {
@@ -659,8 +668,8 @@ main {
   .grid--list__team-members div > h3 {
     position: relative;
     display: inline-block;
-    padding: 8px 8px;
-    font-size: 14px; font-size: 1.4rem;
+    padding: 6px 8px;
+    font-size: 12px; font-size: 1.2rem;
 
     background-color: var(--secondary-color);
     color: var(--white-color);
@@ -692,10 +701,10 @@ main {
   .grid--list__team-members div > p {
     display: inline-block;
     
-    padding: 3px 10px;
+    padding: 2px 8px;
 
     text-align: center;
-    font-size: 14px; font-size:  1.4rem;
+    font-size: 12px; font-size:  1.2rem;
     font-weight: 700;
 
     border: var(--border-settings);
@@ -947,6 +956,32 @@ input[type="radio"]:checked+label, input[type="radio"]:checked+label>span:last-o
   }
 
 /* =============================================================================
+  #CLASS HOME
+============================================================================= */
+.home {
+  display: flex;
+  align-items: center;
+}
+
+  .home > div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .home > div:first-of-type > .btn {
+    position: relative;
+
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+
+  .home > div:first-of-type > .btn + .btn {
+    margin-top: 12px;
+  }
+/* =============================================================================
   #BUTTON
 ============================================================================= */
 button, .btn {
@@ -1003,6 +1038,12 @@ button:hover, .btn:hover, .btn--small:hover {
   transition: all 150ms ease-in-out;
 }
 
+.btn--subtle {
+  font-size: 14px; font-size: 1.4rem;
+  color: var(--grey-text-color);
+  text-decoration: underline;
+}
+
 .btn--small img {
   height: 18px;
   width: auto;
@@ -1018,61 +1059,33 @@ button:hover, .btn:hover, .btn--small:hover {
 .btn--container {
   position: fixed;
 
-  left: var(--default-padding);
-  right: var(--default-padding);
-  bottom: var(--default-padding);
-  
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  z-index: 50;
-}
-
-.overflow .btn--container {
   left: 0;
   right: 0;
   bottom: 0;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 
   padding: 12px var(--default-padding);
   height: 80px;
 
   border-top: var(--border-settings);
   background-color: var(--white-color);
-}
 
-.overflow.yellow-bg .btn--container {
-  background-color: var(--primary-color)!important;
+  z-index: 50;
 }
 
 .overflow--teams .btn--container {
-  height: 135px;
-  padding: var(--default-padding);
+  height: 120px;
 }
 
-.btn--container__center {
-  position: absolute;
-
-  top: 50%;
-  left: 0;
-  right: 0;
-  bottom: auto;
-
-  transform: translateY(calc(-50% - 30px));
+.overflow--teams .btn--container__column {
+  justify-content: space-around;
 }
 
-.btn--subtle {
-  color: var(--grey-text-color);
-  text-decoration: underline;
-}
-
-.btn--container__column {
-  flex-direction: column;
-  align-items: center;
-}
-
-.btn--container__column > * + * {
-  margin-top: 12px;
+.yellow-bg .btn--container {
+  background-color: var(--primary-color);
 }
 
   .btn--container > * {
@@ -1092,13 +1105,29 @@ button:hover, .btn:hover, .btn--small:hover {
     min-width: 50px;
   }
 
+  .btn--container a + button {
+    margin-left: 10px;
+  }
+
+.btn--container__center {
+  position: absolute;
+
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: auto;
+
+  transform: translateY(calc(-50% - 30px));
+}
+
+.btn--container__column {
+  flex-direction: column;
+  align-items: center;
+}
+
   .btn--container__column a {
     width: 100%;
     text-align: center;
-  }
-
-  .btn--container a + button {
-    margin-left: 10px;
   }
 /* =============================================================================
   #ROBOT FOOTER IMG
