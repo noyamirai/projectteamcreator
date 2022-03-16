@@ -426,11 +426,11 @@ main {
   height: calc(100vh - 200px);
 
   margin: 0;
-  padding: 0 0 100px 0;
+  padding: 0 0 80px 0;
 }
 
 .overflow--white main {
-   padding: var(--default-padding) 0 100px 0; 
+   padding: var(--default-padding) 0 80px 0; 
 }
 
 .overflow--teams main {
@@ -734,7 +734,7 @@ body.loading {
 }
 
 .form form {
-  position: absolute;
+  position: fixed;
 
   left: 0;
   right: 0;
@@ -1038,6 +1038,11 @@ button:hover, .btn:hover, .btn--small:hover {
   height: 80px;
 
   border-top: var(--border-settings);
+  background-color: var(--white-color);
+}
+
+.overflow.yellow-bg .btn--container {
+  background-color: var(--primary-color)!important;
 }
 
 .overflow--teams .btn--container {

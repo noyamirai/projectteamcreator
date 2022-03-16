@@ -12,8 +12,10 @@
     </ul>
 
     {{#if classTeams}}
-        <a class="btn--small btn--small-arrow" href="{{prevURL}}/{{linkRef}}/home"><img src="{{../baseURL}}/public/images/icons/arrow-icon.svg" alt="Back icon"></a>
-        
+        <div class="btn--container">
+            <a class="btn--small btn--small-arrow" href="{{prevURL}}/{{linkRef}}/home"><img src="{{../baseURL}}/public/images/icons/arrow-icon.svg" alt="Back icon"></a>
+        </div>
+            
         {{else}}
         <div class="btn--container">
             <a class="btn--small btn--small-arrow" href="{{prevURL}}"><img src="{{../baseURL}}/public/images/icons/arrow-icon.svg" alt="Back icon"></a>
