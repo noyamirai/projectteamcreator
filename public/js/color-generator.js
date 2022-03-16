@@ -16,8 +16,8 @@ boxShadowItems.forEach(element => {
 });
 
 const randomizer = () => {
-    return number = Math.floor(Math.random() * 5);
-}
+    return Math.floor(Math.random() * 5);
+};
 
 // Generates x amount of random numbers based on a set length and adds these to provided array
 const generator = (array, maxLength, amount) => {
@@ -39,7 +39,7 @@ const generator = (array, maxLength, amount) => {
         counter++;
         array.push(array[counter - 1]);
     }
-}
+};
 
 // Assign a color to provided element based on provided randomized index
 const assignColor = (item, chosenOption) => {
@@ -50,7 +50,7 @@ const assignColor = (item, chosenOption) => {
             item.classList.add(`${randomOption}-item`);
         }
     });
-}
+};
 
 for (let i = 0; i < listItems.length; i++) {
     generator(pickFromMe, colorOptions.length, listItems.length);

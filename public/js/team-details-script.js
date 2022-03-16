@@ -18,9 +18,9 @@ const RemoveLastDirectoryPartOf = (url) => {
     let array = url.split(`/`);
     array.pop();
     return (array.join(`/`));
-}
+};
 
-nextItemBtn.addEventListener(`click`, event => {
+nextItemBtn.addEventListener(`click`, () => {
     // when it's the last team, give button a href
     if ((counter + 1) === amountOfTeams) {
         nextItemBtn.href = RemoveLastDirectoryPartOf(window.location.pathname);
@@ -44,6 +44,6 @@ nextItemBtn.addEventListener(`click`, event => {
         teamListEl[counter].classList.toggle(`hide`);
         teamHeadingEl[counter].classList.toggle(`hide`);
     }
-})
+});
 
 skipBtn.href = RemoveLastDirectoryPartOf(window.location.pathname);

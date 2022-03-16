@@ -6,9 +6,9 @@ const closeFormBtn = document.querySelector(`#close-form`);
 const toggleClass = () => {
     bodyEl.classList.toggle(`overlay`);
     formEl.classList.toggle(`form-active`);
-}
+};
 
-formTriggerBtn.addEventListener(`click`, event => {
+formTriggerBtn.addEventListener(`click`, () => {
     // formEl.classList.remove(`hide`);
     toggleClass();
 });

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const express = require(`express`);
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,11 +15,11 @@ const schemas = require(`./models/schemas`);
 const acronymGen = require(`./public/js/acronym-generator`);
 const CRUD = require(`./controller/crud-operations`);
 const team = require(`./controller/team-generator`);
-app.set('view engine', 'hbs');
+app.set(`view engine`, `hbs`);
 
 app.engine(`hbs`, handlebars.engine({
-    layoutsDir: __dirname + `/views/layouts`,
-    partialsDir: __dirname + `/views/partials/`,
+    layoutsDir: `${__dirname}/views/layouts`,
+    partialsDir: `${__dirname}/views/partials/`,
     defaultLayout: `default`,
     extname: `hbs`
 }));
@@ -50,7 +51,7 @@ app.get(`/:username/courses`, (req, res) => {
 
             courseData.forEach(doc => {
                 doc.acronym = acronymGen.createAcronym(doc.course.title);
-            })
+            });
 
             res.render(`courses-overview`, {
                 layout: `default`,
@@ -103,8 +104,8 @@ app.get(`/:username/courses/:course/classes`, (req, res) => {
                     }
                 });
             });
-        })
-    })
+        });
+    });
 });
 
 app.get(`/:username/courses/:course/classes/:class`, (req, res) => {
@@ -177,26 +178,26 @@ app.post(`/:username/courses/:course/classes/:class/teams/team-generation`, (req
     });
 
     schemas.Class.updateMany({
-            title: `Tech-2`
-        }, {
-            $set: {
-                teams: []
-            }
-        },
-        (err, affected) => {
-            console.log(`affected`, affected)
+        title: `Tech-2`
+    }, {
+        $set: {
+            teams: []
         }
-    )
+    },
+    (err, affected) => {
+        console.log(`affected`, affected);
+    }
+    );
 
     schemas.Student.updateMany({}, {
-            $set: {
-                teams: []
-            }
-        },
-        (err, affected) => {
-            console.log(`affected`, affected)
+        $set: {
+            teams: []
         }
-    )
+    },
+    (err, affected) => {
+        console.log(`affected`, affected);
+    }
+    );
 
     // get class object
     CRUD.findDocByQuery(schemas.Class, `linkRef`, req.params.class).then((classObject) => {
@@ -233,7 +234,7 @@ app.post(`/:username/courses/:course/classes/:class/teams/team-generation`, (req
                             CRUD.addIdReferenceToDoc(schemas.Class, classObject._id, `teams`, doc._id);
                             doc.students.forEach(object => {
                                 CRUD.addIdReferenceToDoc(schemas.Student, object.student._id, `teams`, doc._id);
-                            })
+                            });
 
                             // populate team details with student info
                             schemas.Team.findById(doc.id).lean()
@@ -268,7 +269,7 @@ app.post(`/:username/courses/:course/classes/:class/teams/team-generation`, (req
                                 });
                         });
                     });
-                })
+                });
             });
         });
     });
@@ -322,7 +323,7 @@ app.get(`/:username/courses/:course/classes/:class/teams/:number/overview`, (req
 
             teamData.students.forEach(object => {
                 console.log(object.student.user.name.first);
-            })
+            });
 
             console.log(teamObject);
             res.render(`team-details`, {
@@ -333,7 +334,7 @@ app.get(`/:username/courses/:course/classes/:class/teams/:number/overview`, (req
                 prevURL: `/${req.params.username}/courses/${req.params.course}/classes/${req.params.class}/teams`,
                 bannerTitle: teamObject.name,
                 bannerSubtitle: `Team overzicht`,
-                className: 'overflow'
+                className: `overflow`
             });
         });
     });
@@ -350,26 +351,26 @@ app.get(`/team-reset`, (req, res) => {
     });
 
     schemas.Class.updateMany({
-            title: `Tech-2`
-        }, {
-            $set: {
-                teams: []
-            }
-        },
-        (err, affected) => {
-            console.log(`affected`, affected)
+        title: `Tech-2`
+    }, {
+        $set: {
+            teams: []
         }
-    )
+    },
+    (err, affected) => {
+        console.log(`affected`, affected);
+    }
+    );
 
     schemas.Student.updateMany({}, {
-            $set: {
-                teams: []
-            }
-        },
-        (err, affected) => {
-            console.log(`affected`, affected)
+        $set: {
+            teams: []
         }
-    )
+    },
+    (err, affected) => {
+        console.log(`affected`, affected);
+    }
+    );
 });
 
 app.get(`*`, (req, res) => {

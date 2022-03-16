@@ -1,3 +1,4 @@
+/* eslint-disable no-inner-declarations */
 const generate = async (students, teamSize) => {
 
     let allTeams = [];
@@ -146,7 +147,6 @@ const generate = async (students, teamSize) => {
                             if (!duplicate) {
                                 // console.log(`potential new member doesnt have same skill as this team member!`);
                                 newStudent = potentialStudent;
-                                done = true;
 
                                 const updatedStudentArray = allStudents.filter(item => item._id != newStudent._id);
                                 return [newStudent, updatedStudentArray];
@@ -198,7 +198,7 @@ const generate = async (students, teamSize) => {
     }
 
     return allTeams;
-}
+};
 
 module.exports = {
     generate

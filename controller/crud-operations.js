@@ -15,7 +15,7 @@ const createDoc = async (schema, object) => {
             resolve(doc);
         });
     });
-}
+};
 
 /**
  *   createMultipleDocs
@@ -32,7 +32,7 @@ const createMultipleDocs = async (schema, objects) => {
             resolve(result);
         });
     });
-}
+};
 
 /**
  *   findDocByQuery
@@ -58,11 +58,11 @@ const findDocByQuery = async (schema, attribute, equalTo) => {
                 result.forEach((doc) => {
                     console.log(`doc found in db`);
                     resolve(doc);
-                })
+                });
             }
         });
-    })
-}
+    });
+};
 
 /**
  *   AddIdReferenceToDoc
@@ -81,7 +81,7 @@ const addIdReferenceToDoc = async (schemaToFind, docIds, referenceSchemas, refer
             doc[referenceSchemas].push(referenceIds);
             doc.save();
             console.log(`reference id added to doc`);
-        })
+        });
 
         // one doc to be updated with multiple ids
     } else if (!Array.isArray(docIds) && Array.isArray(referenceIds)) {
@@ -91,7 +91,7 @@ const addIdReferenceToDoc = async (schemaToFind, docIds, referenceSchemas, refer
                 doc[referenceSchemas].push(id);
                 doc.save();
                 console.log(`multiple reference ids added to doc`);
-            })
+            });
         }
 
         // multiple docs to be updated with single id
@@ -102,22 +102,22 @@ const addIdReferenceToDoc = async (schemaToFind, docIds, referenceSchemas, refer
                 doc[referenceSchemas].push(referenceIds);
                 doc.save();
                 console.log(`reference id added to multiple docs`);
-            })
+            });
         }
 
-        // multiple docs to be updated with multiple ids
+    // multiple docs to be updated with multiple ids
     } else {
         for (let id of docIds) {
-            await findDocByQuery(schema, `_id`, id).then((doc) => {
-                for (let userId in userIds) {
-                    doc[referenceSchemas].push(userId);
+            await findDocByQuery(schemaToFind, `_id`, id).then((doc) => {
+                for (let id in referenceIds) {
+                    doc[referenceSchemas].push(id);
                     doc.save();
                     console.log(`multiple reference ids added to multiple docs`);
                 }
-            })
+            });
         }
     }
-}
+};
 
 module.exports = {
     createDoc,
