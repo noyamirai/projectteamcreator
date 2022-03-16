@@ -399,8 +399,8 @@ main {
   padding: var(--default-padding) 0 110px 0px;
   margin: 0 var(--default-padding);
 
-  min-height: calc(100vh - 180px);
-  min-height: -webkit-fill-available;
+  /* min-height: calc(100vh - 180px);
+  min-height: -webkit-fill-available; */
 }
 
 .grid {
