@@ -71,10 +71,6 @@ body {
   width: 100%;
 }
 
-body.form {
-  /* overflow: hidden; */
-}
-
 img {
   max-width: 100%;
   font-style: italic;
