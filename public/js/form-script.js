@@ -9,6 +9,7 @@ const toggleClass = () => {
 }
 
 formTriggerBtn.addEventListener(`click`, event => {
+    // formEl.classList.remove(`hide`);
     toggleClass();
 });
 
@@ -16,4 +17,5 @@ closeFormBtn.addEventListener(`click`, event => {
     event.preventDefault();
 
     toggleClass();
+    // formEl.classList.add(`hide`);
 });
