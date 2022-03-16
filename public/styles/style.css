@@ -441,7 +441,7 @@ main {
     padding: 0px 0px 110px 0px;
 }
 
-.overflow main::before {
+/* .overflow main::before {
   content: "";
   position: absolute;
 
@@ -455,7 +455,7 @@ main {
   background-color: var(--secondary-color);
 
   z-index: 50;
-}
+} */
 
 .overflow--teams main::before {
     bottom: 140px;
@@ -506,6 +506,7 @@ main {
 }
 
 .overflow--teams .grid--list {
+  grid-auto-rows: min-content;
   height: 100%!important;
 }
 
@@ -741,7 +742,7 @@ body.loading {
 
   transform: translateY(100%);
 
-  padding: 50px var(--default-padding) 158px var(--default-padding);
+  padding: 50px var(--default-padding) 138px var(--default-padding);
 
   background-color: var(--white-color);
 
@@ -764,7 +765,7 @@ body.loading {
   display: flex;
   flex-direction: column;
 
-  bottom: var(--default-padding);
+  bottom: 10px;
 }
 
   .form form > div > button {
@@ -1023,7 +1024,25 @@ button:hover, .btn:hover, .btn--small:hover {
   
   display: flex;
   flex-direction: row;
+  align-items: center;
+
   z-index: 50;
+}
+
+.overflow .btn--container {
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 12px var(--default-padding);
+  height: 80px;
+
+  border-top: var(--border-settings);
+}
+
+.overflow--teams .btn--container {
+  height: 135px;
+  padding: var(--default-padding);
 }
 
 .btn--container__center {
