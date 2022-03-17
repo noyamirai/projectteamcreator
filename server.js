@@ -164,6 +164,27 @@ app.get(`/:username/courses/:course/classes/:class/home`, (req, res) => {
     });
 });
 
+app.get(`/:username/courses/:course/classes/:class/teams/team-generation/form`, (req, res) => {
+    const baseURL = req.path;
+    const prevURL = `/${req.params.username}/courses/${req.params.course}/classes/${req.params.class}`;
+
+    CRUD.findDocByQuery(schemas.Class, `linkRef`, req.params.class).then((classObject) => {
+        console.log(classObject);
+        res.render(`form-page`, {
+            layout: `default`,
+            baseURL: baseURL,
+            root: global.appRoot,
+            prevURL: prevURL,
+            bannerTitle: classObject.title,
+            bannerSubtitle: `${classObject.students.length} studenten`,
+            linkRef: classObject.linkRef,
+            className: `form form--overview`,
+            formURL: `${prevURL}/teams/team-generation`,
+            classTeams: classObject.teams
+        });
+    });
+});
+
 app.post(`/:username/courses/:course/classes/:class/teams/team-generation`, (req, res) => {
     const teamSize = req.body.teamSize;
     const baseURL = req.path;
@@ -298,7 +319,8 @@ app.get(`/:username/courses/:course/classes/:class/teams`, function(req, res) {
                 teamData: classData.teams.sort((a, b) => parseFloat(a.number) - parseFloat(b.number)),
                 bannerTitle: classData.title,
                 bannerSubtitle: `Team overzicht`,
-                className: `overflow overflow--white form`
+                className: `overflow overflow--white form`,
+                linkRef: classObject.linkRef
             });
         });
     });

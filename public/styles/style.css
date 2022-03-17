@@ -210,14 +210,6 @@ ul, ol {
   z-index: 50;
   transition: all 100ms ease-in-out;
 }
-
-.notransition * {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -o-transition: none !important;
-  -ms-transition: none !important;
-  transition: none !important;
-}
 /* =============================================================================
   #BANNER
 ============================================================================= */
@@ -664,6 +656,20 @@ body.loading {
   transition: transform 300ms ease-in-out;
 }
 
+.form--overview form {
+  position: initial;
+
+  left: auto;
+  right: auto;
+  bottom: auto;
+
+  padding: 0;
+
+  transform: translateY(0);
+
+  border-radius: 0;
+}
+
 .form form.form-active {
   transform: translateY(0);
 }
@@ -679,6 +685,16 @@ body.loading {
   bottom: 10px;
 }
 
+.form--overview form > div {
+  position:relative;
+
+  left: auto;
+  right: auto;
+  bottom: auto;
+  
+  margin-top: 30px;
+}
+
   .form form > div > button {
     position: relative;
     top: auto;
@@ -687,10 +703,21 @@ body.loading {
     right: auto;
   }
 
-  .form form > div > button:last-of-type {
+  .form form > div > button:last-of-type, .form--overview form > div > a {
     background-color: var(--white-color);
     color: var(--grey-text-color);
     text-decoration: underline;
+  }
+
+  .form--overview form > div > a {
+    margin-top: 12px;
+  }
+
+  .form--overview form > div > button:first-of-type {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    text-decoration: none;
+    width: 100%;
   }
 
 .form form::before {
@@ -708,6 +735,10 @@ body.loading {
   border-radius: 4px;
 
   background-color: var(--grey-color);
+}
+
+.form--overview form::before {
+  display: none;
 }
 
   fieldset {
@@ -897,7 +928,7 @@ button, .btn {
   display: inline-block;
   padding: 14px;
 
-  /* width: 100%; */
+  width: 100%;
   min-height: 50px;
 
   color: var(--white-color);
@@ -999,7 +1030,7 @@ button:hover, .btn:hover, .btn--small:hover {
     right: auto;
   }
 
-  .btn--container button {
+  .btn--container .btn {
     width: 100%;
   }
 
@@ -1007,7 +1038,7 @@ button:hover, .btn:hover, .btn--small:hover {
     min-width: 50px;
   }
 
-  .btn--container a + button {
+  .btn--container a + .btn, .btn--container a + button {
     margin-left: 10px;
   }
 
@@ -1030,26 +1061,6 @@ button:hover, .btn:hover, .btn--small:hover {
   .btn--container__column a {
     width: 100%;
     text-align: center;
-  }
-/* =============================================================================
-  #ROBOT FOOTER IMG
-============================================================================= */
-.robot-img {
-  position: absolute;
-
-  bottom: 60px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  height: 70px;
-
-  opacity: var(--image-opacity);
-  z-index: -10;
-}
-
-  .form .robot-img {
-    bottom: calc(60px + 50px);
   }
 /* =============================================================================
   #FOOTER
