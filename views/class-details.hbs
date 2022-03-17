@@ -27,5 +27,6 @@
     
 </main>
 
-<script src="{{../baseURL}}/public/js/toggle-script.js"></script>
-<script async src="{{../baseURL}}/public/js/form-script.js"></script>
+{{#unless classTeams}}
+    <script async src="{{../baseURL}}/public/js/form-script.js"></script>
+{{/unless}}
