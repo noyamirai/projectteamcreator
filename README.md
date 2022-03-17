@@ -1,7 +1,13 @@
-# :sparkles: Project Team Creator :sparkles:
+# :sparkles: CMD Team Creator :sparkles:
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
-PTC (Project Team Creator) is a browser based matching application, build to help teachers of CMD create well balanced teams for group assignments and/or projects. These teams will be generated based on the CMD skills types of students.
+CMD Team Creator is a browser based matching application, build with HTML/CSS/JS and Node.js to help teachers of CMD create well-balanced project teams based on skills of students. 
+
+With help of this application, teachers do not have to spend time and energy on creating teams and worrying whether or not skill levels of students will match. In addition, students no longer have to worry about their upcoming project team, knowing their team will be fair and balanced.
+
+![Team creator forms](./public/images/readme/team_creator-preview.jpg)
+
+(Even though the web application has mostly been build from a teacher's point of view, in the future I would like this app to become sort of like a community app for the entirety of CMD.)
 
 ## :zap: Quickstart
  If you want to start working with on PTC, and you have cloned this repo to your desktop, go to its root directory and run `npm install` to install its dependencies.
