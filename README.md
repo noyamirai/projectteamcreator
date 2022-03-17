@@ -36,7 +36,7 @@ Running the application with nodemon
 npm run start:dev
 ~~~
 
-Both these prompts will give you access via localhost:3000. And That's it! Have any trouble? Feel free to let us know by submitting an issue. (no e-mail yet :stuck_out_tongue:)
+Both these prompts will give you access via `localhost:3000/roberrrt-s/courses` (yes, we are using one of our teachers as dummy data). And That's it! Have any trouble? Feel free to let us know by submitting an issue. (no e-mail yet :stuck_out_tongue:)
 
 ## :eyes: Usage (code examples)
 Listed below are some of the common examples with our very own CRUD operations.
